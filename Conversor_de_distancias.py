@@ -4,7 +4,9 @@ import tkinter as tk
 #Janela
 window = tk.Tk()
 window.title("Conversor de distâncias")
+window.minsize(500, 250)
 
+#Centralizar a janela
 #Obter a largura e altura do ecrã
 largura_ecra = window.winfo_screenwidth() #Largura do ecrã
 altura_ecra = window.winfo_screenheight() #Altura do ecrã
