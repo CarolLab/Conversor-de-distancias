@@ -1,5 +1,9 @@
 import tkinter as tk
 
+def converter(distancia):
+    unit_1 = int(distancia.get())
+    distancia_2["text"] = unit_1 * 1000
+
 
 #Janela
 window = tk.Tk()
@@ -60,8 +64,8 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 
 #Unidades
-km = tk.Label(frame_2, text = "Unidade1", font = "Times")
-m = tk.Label(frame_2, text = "Unidade2", font = "Times")
+km = tk.Label(frame_2, text = "Km", font = "Times")
+m = tk.Label(frame_2, text = "m", font = "Times")
 
 
 km.place(relx = 0.19, rely = 0.47, anchor = "center")
@@ -73,7 +77,8 @@ botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   text="Converter", font="Roboto 11",fg = "White",
                   activebackground= "#6e7370", activeforeground= "#ccc9be",
                   bg = "#3b3d3c", bd = 3,
-                  relief = "solid", overrelief="flat")
+                  relief = "solid", overrelief="flat",
+                  command = lambda: converter(distancia_1))
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
 
 
