@@ -2,49 +2,54 @@ import tkinter as tk
 
 #Funções - - - - -  - - - - - - - - - - - - - - - - - - - - - - - -
 def obter_unidade_lstb2():#Obter as unidades selecionadas da listbox 2
-    posicao = lista_2.curselection() #Posição da unidade na listbox2
+    posicao = listbx_2.curselection() #Posição da unidade na listbox2
     if posicao: #se há algum item selecionado
-        unidade_lstb2 = lista_2.get(posicao) #Unidade selecionada
-
-
-        unidade_label2["text"] = unidade_lstb2 #Texto muda para a unidade selecionada
+        unidade_label2["text"] = listbx_2.get(posicao) #Obtem a unidade selecionada e
+        # muda o texto da label para a unidade
 
 
 def obter_unidade_lstb1(): #Obter as unidades selecionadas da listbox 1
-    posicao = lista_1.curselection() #Posição da unidade na listbox1
+    posicao = listbx_1.curselection() #Posição da unidade na listbox1
     if posicao: #se há algum item selecionado
-        unidade_lstb1 = lista_1.get(posicao) #unidade selecionada
-        unidade_label1["text"] = unidade_lstb1 #Texto muda para a unidade selecionada
-
+        unidade_label1["text"] = listbx_1.get(posicao)#Obtém a unidade selecionada e
+        #muda o texto da label para a unidade
 
 
 def converter(distancia): #Converter unidade 1
-    global unidade_label1 #Unidade 1 escolhida
-    global unidade_label2 #Unidade 2 escolhida
+    global unidade_label1  # Unidade 1 escolhida
+    global unidade_label2  # Unidade 2 escolhida
 
-    unit_converter = float(distancia.get()) #Obter o número a converter
-    unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
-    unidade2 = unidade_label2.cget("text")
 
-    if unidade1 == "Km":
-        # Converter o número pretendido
-        if unidade2 == "m":
-            distancia_2["text"] = unit_converter * 1000 #Mostrar o valor convertido
-        else: #Se for cm
-            distancia_2["text"] = unit_converter * 100000
+    try:
+        unit_converter = float(distancia.get()) #Obter o número a converter
+        unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
+        unidade2 = unidade_label2.cget("text")
 
-    elif unidade1 == "m":
-        if unidade2 == "Km":
-            distancia_2["text"] = unit_converter / 1000
-        else: #Se for cm
-            distancia_2["text"] = unit_converter * 100 #de m para cm
+        if unidade1 and unidade2:
+            if unidade1 == "Km":
+                # Converter o número pretendido
+                if unidade2 == "m":
+                    distancia_2["text"] = unit_converter * 1000 #Mostrar o valor convertido
+                else: #Se for cm
+                    distancia_2["text"] = unit_converter * 100000
 
-    else: #Se a unidade 1 for cm
-        if unidade2 == "Km": #cm para km
-            distancia_2["text"] = unit_converter / 1000000
-        else: #Se for m
-            distancia_2["text"] = unit_converter / 100
+            elif unidade1 == "m":
+                if unidade2 == "Km":
+                    distancia_2["text"] = unit_converter / 1000
+                else: #Se for cm
+                    distancia_2["text"] = unit_converter * 100 #de m para cm
 
+            else: #Se a unidade 1 for cm
+                if unidade2 == "Km": #cm para km
+                    distancia_2["text"] = unit_converter / 1000000
+                else: #Se for m
+                    distancia_2["text"] = unit_converter / 100
+
+        else:
+            label_erro["text"] = "Escolha as unidades"
+
+    except:
+        label_erro["text"] = "Insira um número"
 
 #Janela - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 window = tk.Tk()
@@ -83,6 +88,9 @@ frame_1.place(relx = 0, rely = 0,
 frame_2.place(relx = 0, rely = 0.15,
               relwidth = 1, relheight = 0.85)
 
+#Label_Erro - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+label_erro = tk.Label(frame_2, text = "", fg = "OrangeRed3", font = ("Roboto", 11, "bold"))
+label_erro.place(relx = 0.50, rely = 0.92, anchor = "center")
 
 #Título - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 titulo = tk.Label(frame_1, text = "Conversor de Distâncias",bg = "#76b4b5", font = "Roboto 18 bold")
@@ -105,27 +113,28 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 #Listboxs
 unidades = ["Km", "m", "cm"] #Unidades disponíveis
 
-lista_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
+listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
                      selectmode = "browse")
-lista_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), justify = "center",
+listbx_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), justify = "center",
                      selectmode = "browse")
 
+#Labels
 unidade_label1 = tk.Label(frame_2, text = "") #Label da unidade 1 (lista_1)
 unidade_label2 = tk.Label(frame_2, text = "") #Label da unidade 2 (lista_2)
 
 
 #Inserir as unidades
-lista_1.insert(tk.END, *unidades)
-lista_2.insert(tk.END, *unidades)
+listbx_1.insert(tk.END, *unidades)
+listbx_2.insert(tk.END, *unidades)
 
 
 #Obter as unidades selecionadas
-lista_1.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb1())
-lista_2.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb2())
+listbx_1.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb1())
+listbx_2.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb2())
 
 #Posicionamentos das Listbox e Labels
-lista_1.place(relx = 0.19, rely = 0.47, relwidth = 0.1, relheight = 0.20,anchor = "n")
-lista_2.place(relx = 0.80, rely = 0.47,relwidth = 0.1,relheight = 0.20, anchor = "n")
+listbx_1.place(relx = 0.19, rely = 0.47, relwidth = 0.1, relheight = 0.20,anchor = "n")
+listbx_2.place(relx = 0.80, rely = 0.47,relwidth = 0.1,relheight = 0.20, anchor = "n")
 
 unidade_label1.place(relx = 0.19, rely = 0.15, anchor = "center")
 unidade_label2.place(relx = 0.80, rely = 0.15, anchor = "center")
@@ -140,8 +149,8 @@ botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
 
 #Scrollbars - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-scrollbar_1 = tk.Scrollbar(lista_1, relief = "flat")
-scrollbar_2 = tk.Scrollbar(lista_2, relief = "flat")
+scrollbar_1 = tk.Scrollbar(listbx_1, relief = "flat")
+scrollbar_2 = tk.Scrollbar(listbx_2, relief = "flat")
 #Seta - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 seta = tk.Label(frame_2, text = "➜", font = "Arial 16")
 seta.place(relx = 0.48, rely = 0.25)
