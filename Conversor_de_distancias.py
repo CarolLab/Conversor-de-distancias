@@ -19,16 +19,31 @@ def obter_unidade_lstb1(): #Obter as unidades selecionadas da listbox 1
 
 
 def converter(distancia): #Converter unidade 1
-    global unidade_label1
-    global unidade_label2
+    global unidade_label1 #Unidade 1 escolhida
+    global unidade_label2 #Unidade 2 escolhida
 
     unit_converter = float(distancia.get()) #Obter o número a converter
     unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
+    unidade2 = unidade_label2.cget("text")
 
     if unidade1 == "Km":
-        distancia_2["text"] = unit_converter * 1000 #Mostrar o valor convertido
+        # Converter o número pretendido
+        if unidade2 == "m":
+            distancia_2["text"] = unit_converter * 1000 #Mostrar o valor convertido
+        else: #Se for cm
+            distancia_2["text"] = unit_converter * 100000
+
     elif unidade1 == "m":
-        distancia_2["text"] = unit_converter / 1000
+        if unidade2 == "Km":
+            distancia_2["text"] = unit_converter / 1000
+        else: #Se for cm
+            distancia_2["text"] = unit_converter * 100 #de m para cm
+
+    else: #Se a unidade 1 for cm
+        if unidade2 == "Km": #cm para km
+            distancia_2["text"] = unit_converter / 1000000
+        else: #Se for m
+            distancia_2["text"] = unit_converter / 100
 
 
 #Janela - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -75,8 +90,8 @@ titulo.place(relx = 0.5, rely = 0.5, anchor = "center")
 
 
 
-
 #Distâncias - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Entrys
 distancia_1 = tk.Entry(frame_2, relief = "solid", bd = 1,
                        font = "Calibri 13")
 distancia_2 = tk.Label(frame_2, text = "", bd = 2, relief = "solid", bg = "White",
@@ -87,7 +102,8 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 
 #Unidades - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-unidades = ["Km", "m"] #Unidades disponíveis
+#Listboxs
+unidades = ["Km", "m", "cm"] #Unidades disponíveis
 
 lista_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
                      selectmode = "browse")
@@ -113,6 +129,7 @@ lista_2.place(relx = 0.80, rely = 0.47,relwidth = 0.1,relheight = 0.20, anchor =
 
 unidade_label1.place(relx = 0.19, rely = 0.15, anchor = "center")
 unidade_label2.place(relx = 0.80, rely = 0.15, anchor = "center")
+
 #Botão - - - - - - - - - - - - - - - - - - - - - - - - -  - - -
 botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   text="Converter", font="Roboto 11",fg = "White",
@@ -122,8 +139,9 @@ botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   command = lambda: converter(distancia_1))
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
 
-
-
+#Scrollbars - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+scrollbar_1 = tk.Scrollbar(lista_1, relief = "flat")
+scrollbar_2 = tk.Scrollbar(lista_2, relief = "flat")
 #Seta - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 seta = tk.Label(frame_2, text = "➜", font = "Arial 16")
 seta.place(relx = 0.48, rely = 0.25)
