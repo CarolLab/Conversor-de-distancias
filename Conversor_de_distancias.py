@@ -123,9 +123,9 @@ titulo.place(relx = 0.5, rely = 0.5, anchor = "center")
 #Distâncias - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Entrys
 distancia_1 = tk.Entry(frame_2, relief = "solid", bd = 1,
-                       font = "Calibri 13")
+                       font = "Calibri 13") #Número para converter
 distancia_2 = tk.Label(frame_2, text = "", bd = 2, relief = "solid", bg = "White",
-                       font = "Calibri 13")
+                       font = "Calibri 13")#Número convertido
 
 distancia_1.place(relx = 0.05, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
@@ -141,8 +141,8 @@ listbx_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), ju
                      selectmode = "browse")
 
 #Labels
-unidade_label1 = tk.Label(frame_2, text = "") #Label da unidade 1 (lista_1)
-unidade_label2 = tk.Label(frame_2, text = "") #Label da unidade 2 (lista_2)
+unidade_label1 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 1 (lista_1)
+unidade_label2 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 2 (lista_2)
 
 
 #Inserir as unidades
