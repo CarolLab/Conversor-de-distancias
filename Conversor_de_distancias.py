@@ -123,7 +123,7 @@ titulo.place(relx = 0.5, rely = 0.5, anchor = "center")
 #Distâncias - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Entrys
 distancia_1 = tk.Entry(frame_2, relief = "solid", bd = 1,
-                       font = "Calibri 13") #Número para converter
+                       font = "Arial 13") #Número para converter
 distancia_2 = tk.Label(frame_2, text = "", bd = 2, relief = "solid", bg = "White",
                        font = "Calibri 13")#Número convertido
 
