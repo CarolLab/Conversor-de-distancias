@@ -40,8 +40,11 @@ def converter(distancia): #Converter unidade 1
                     elif unidade2 == "dm":
                         distancia_2["text"] = unit_converter * 10000
 
-                    else: #Se a unidade2 for hm
+                    elif unidade2 == "hm":
                         distancia_2["text"] = unit_converter * 10
+
+                    else:#Se unidade2 for dam
+                        distancia_2["text"] = unit_converter * 100
 
                 elif unidade1 == "m":
                     if unidade2 == "Km":
@@ -53,8 +56,11 @@ def converter(distancia): #Converter unidade 1
                     elif unidade2 == "dm":
                         distancia_2["text"] = unit_converter * 10
 
-                    else:#Se unidade2 for hm
+                    elif unidade2 == "hm":
                         distancia_2["text"] = unit_converter / 100
+
+                    else: #Se unidade2 for dam
+                        distancia_2["text"] = unit_converter / 10
 
                 elif unidade1 == "cm":
                     if unidade2 == "m": #Se for m
@@ -66,22 +72,24 @@ def converter(distancia): #Converter unidade 1
                     elif unidade2 == "Km":
                         distancia_2["text"] = unit_converter / 1000000
 
-                    else: #se a unidade2 for hm
+                    elif unidade2 == "hm":
                         distancia_2["text"] = unit_converter / 10000
+                    else:
+                        distancia_2["text"] = unit_converter / 1000
 
-
-                elif unidade1 == "dm": #Se a unidade1 for dm
+                elif unidade1 == "dm":
                     if unidade2 == "m":
                         distancia_2["text"] = unit_converter / 10
                     elif unidade2 == "cm":
                         distancia_2["text"] = unit_converter * 10
                     elif unidade2 == "Km":
                         distancia_2["text"] = unit_converter / 10000
-                    else: #Se for hm
+                    elif unidade2 == "hm":
                         distancia_2["text"] = unit_converter / 1000
+                    else: #Se unidad2 for dam
+                        distancia_2["text"] = unit_converter / 100
 
-
-                else:#Se a unidade1 for hm
+                elif unidade1 == "hm":
                     if unidade2 == "m":
                         distancia_2["text"] = unit_converter * 100
 
@@ -91,9 +99,23 @@ def converter(distancia): #Converter unidade 1
                     elif unidade2 == "cm":
                         distancia_2["text"] = unit_converter * 10000
 
-                    else: #Se a unidade2 for dm
+                    elif unidade2 == "dm":
                         distancia_2["text"] = unit_converter * 1000
+                    else: #Se unidade2 for dam
+                        distancia_2["text"] = unit_converter * 10
 
+
+                else: #Se a unidade1 for dam
+                    if unidade2 == "m":
+                        distancia_2["text"] = unit_converter * 10
+                    elif unidade2 == "Km":
+                        distancia_2["text"] =  unit_converter / 100
+                    elif unidade2 == "cm":
+                        distancia_2["text"] = unit_converter * 1000
+                    elif unidade2 == "dm":
+                        distancia_2["text"] = unit_converter * 100
+                    else: #Se a unidade1 for hm
+                        distancia_2["text"] = unit_converter / 10
 
         else:
             label_erro["text"] = "Escolha as unidades"
@@ -161,7 +183,7 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 #Unidades - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Listboxs
-unidades = ["Km","hm", "m","dm", "cm"] #Unidades disponíveis
+unidades = ["Km","hm","dam","m","dm", "cm"] #Unidades disponíveis
 
 listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
                      selectmode = "browse")
