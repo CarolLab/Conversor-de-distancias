@@ -25,6 +25,8 @@ def converter(distancia): #Converter unidade 1
         unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
         unidade2 = unidade_label2.cget("text")
 
+        label_erro.config(text = "")
+
         if unidade1 and unidade2:
             if unidade1 == unidade2:
                 distancia_2["text"] = unit_converter#Se as unidades forem iguais o número é o mesmo
@@ -70,7 +72,7 @@ def converter(distancia): #Converter unidade 1
                         distancia_2["text"] = unit_converter / 10
 
                     elif unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 1000000
+                        distancia_2["text"] = unit_converter / 100000
 
                     elif unidade2 == "hm":
                         distancia_2["text"] = unit_converter / 10000
@@ -88,6 +90,20 @@ def converter(distancia): #Converter unidade 1
                         distancia_2["text"] = unit_converter / 1000
                     else: #Se unidad2 for dam
                         distancia_2["text"] = unit_converter / 100
+
+                elif unidade1 == "mm":
+                    if unidade2 == "cm":
+                        distancia_2["text"] = unit_converter / 10
+                    elif unidade2 == "dm":
+                        distancia_2["text"] = unit_converter /100
+                    elif unidade2 == "m":
+                        distancia_2["text"] = unit_converter / 1000
+                    elif unidade2 == "Km":
+                        distancia_2["text"] = unit_converter / 1000000
+                    elif unidade2 == "hm":
+                        distancia_2["text"] = unit_converter / 100000
+                    else: #Se unidade2 for dam
+                        distancia_2["text"] = unit_converter / 10000
 
                 elif unidade1 == "hm":
                     if unidade2 == "m":
@@ -183,7 +199,7 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 #Unidades - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Listboxs
-unidades = ["Km","hm","dam","m","dm", "cm"] #Unidades disponíveis
+unidades = ["Km","hm","dam","m","dm", "cm", "mm"] #Unidades disponíveis
 
 listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
                      selectmode = "browse")
