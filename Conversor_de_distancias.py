@@ -9,10 +9,11 @@ def obter_unidade_lstb2():#Obter as unidades selecionadas da listbox 2
 
 
 def obter_unidade_lstb1(): #Obter as unidades selecionadas da listbox 1
-    posicao = listbx_1.curselection() #Posição da unidade na listbox1
+    posicao = listbx_1.curselection() #Recebe a posição da unidade na listbox1 em tupla
     if posicao: #se há algum item selecionado
         unidade_label1["text"] = listbx_1.get(posicao)#Obtém a unidade selecionada e
         #muda o texto da label para a unidade
+
 
 
 def converter(distancia): #Converter unidade 1
@@ -21,122 +22,43 @@ def converter(distancia): #Converter unidade 1
 
 
     try:
-        unit_converter = float(distancia.get()) #Obter o número a converter
+        num_converter = float(distancia.get()) #Obter o número a converter
         unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
         unidade2 = unidade_label2.cget("text")
 
         label_erro.config(text = "")
 
-        if unidade1 and unidade2:
+        #Dicionário com as fórmulas correspondestes para converter
+        formulas_para_converter = {"Km": 1000,#1km == 1000 metros
+                                "hm": 100,
+                                "dam": 10,
+                                "m": 1,
+                                "dm": 0.1,
+                                "cm": 0.01,
+                                "mm": 0.001}
+
+
+        #Km  (x10 ->)  hm  (x10 ->) dam  (x10->) m  (x10->)  dm  (x10->) cm  (x10->)  mm
+        #    (<-x0.1)      (<-x0.1)      (<-x0.1)   (<-x0.1)     (<-x0.1)    (<-x0.1)
+
+        if unidade1 and unidade2: #Se tiver alguma unidade escolhida
             if unidade1 == unidade2:
-                distancia_2["text"] = unit_converter#Se as unidades forem iguais o número é o mesmo
+                distancia_2["text"] = num_converter#Se as unidades forem iguais o número é o mesmo
             else:#Se forem distintas
-                if unidade1 == "Km":
-                    #Converter para a unidade pretendida
-                    if unidade2 == "m":
-                        distancia_2["text"] = unit_converter * 1000 #Mostrar o valor convertido
+                #Converter o número da unidade1 para metro
+                valor_em_metro = num_converter * formulas_para_converter[unidade1]
+                #Número para converter multiplicado pela fómula correspondente para metro
 
-                    elif unidade2 == "cm":
-                        distancia_2["text"] = unit_converter * 100000
+                #Converter de metro para a unidade2 escolhida
+                valor_final = valor_em_metro / formulas_para_converter[unidade2]
 
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter * 10000
+                distancia_2["text"] = valor_final
 
-                    elif unidade2 == "hm":
-                        distancia_2["text"] = unit_converter * 10
-
-                    else:#Se unidade2 for dam
-                        distancia_2["text"] = unit_converter * 100
-
-                elif unidade1 == "m":
-                    if unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 1000
-
-                    elif unidade2 == "cm": #Se for cm
-                        distancia_2["text"] = unit_converter * 100
-
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter * 10
-
-                    elif unidade2 == "hm":
-                        distancia_2["text"] = unit_converter / 100
-
-                    else: #Se unidade2 for dam
-                        distancia_2["text"] = unit_converter / 10
-
-                elif unidade1 == "cm":
-                    if unidade2 == "m": #Se for m
-                        distancia_2["text"] = unit_converter / 100
-
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter / 10
-
-                    elif unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 100000
-
-                    elif unidade2 == "hm":
-                        distancia_2["text"] = unit_converter / 10000
-                    else:
-                        distancia_2["text"] = unit_converter / 1000
-
-                elif unidade1 == "dm":
-                    if unidade2 == "m":
-                        distancia_2["text"] = unit_converter / 10
-                    elif unidade2 == "cm":
-                        distancia_2["text"] = unit_converter * 10
-                    elif unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 10000
-                    elif unidade2 == "hm":
-                        distancia_2["text"] = unit_converter / 1000
-                    else: #Se unidad2 for dam
-                        distancia_2["text"] = unit_converter / 100
-
-                elif unidade1 == "mm":
-                    if unidade2 == "cm":
-                        distancia_2["text"] = unit_converter / 10
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter /100
-                    elif unidade2 == "m":
-                        distancia_2["text"] = unit_converter / 1000
-                    elif unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 1000000
-                    elif unidade2 == "hm":
-                        distancia_2["text"] = unit_converter / 100000
-                    else: #Se unidade2 for dam
-                        distancia_2["text"] = unit_converter / 10000
-
-                elif unidade1 == "hm":
-                    if unidade2 == "m":
-                        distancia_2["text"] = unit_converter * 100
-
-                    elif unidade2 == "Km":
-                        distancia_2["text"] = unit_converter / 10
-
-                    elif unidade2 == "cm":
-                        distancia_2["text"] = unit_converter * 10000
-
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter * 1000
-                    else: #Se unidade2 for dam
-                        distancia_2["text"] = unit_converter * 10
-
-
-                else: #Se a unidade1 for dam
-                    if unidade2 == "m":
-                        distancia_2["text"] = unit_converter * 10
-                    elif unidade2 == "Km":
-                        distancia_2["text"] =  unit_converter / 100
-                    elif unidade2 == "cm":
-                        distancia_2["text"] = unit_converter * 1000
-                    elif unidade2 == "dm":
-                        distancia_2["text"] = unit_converter * 100
-                    else: #Se a unidade1 for hm
-                        distancia_2["text"] = unit_converter / 10
 
         else:
             label_erro["text"] = "Escolha as unidades"
 
-    except:
+    except ValueError:
         label_erro["text"] = "Insira um número"
 
 #Janela - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
