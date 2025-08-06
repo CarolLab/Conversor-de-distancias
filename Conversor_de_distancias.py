@@ -65,6 +65,7 @@ def converter(distancia): #Converter unidade 1
 window = tk.Tk()
 window.title("Conversor de distâncias")
 window.minsize(500, 250)
+window.maxsize(800, 400)
 
 #Centralizar a janela
 #Obter a largura e altura do ecrã
@@ -143,8 +144,8 @@ listbx_1.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb1())
 listbx_2.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb2())
 
 #Posicionamentos das Listbox e Labels
-listbx_1.place(relx = 0.19, rely = 0.47, relwidth = 0.1, relheight = 0.20,anchor = "n")
-listbx_2.place(relx = 0.80, rely = 0.47,relwidth = 0.1,relheight = 0.20, anchor = "n")
+listbx_1.place(relx = 0.19, rely = 0.47, relwidth = 0.1, relheight = 0.22,anchor = "n")
+listbx_2.place(relx = 0.80, rely = 0.47,relwidth = 0.1,relheight = 0.22, anchor = "n")
 
 unidade_label1.place(relx = 0.19, rely = 0.15, anchor = "center")
 unidade_label2.place(relx = 0.80, rely = 0.15, anchor = "center")
