@@ -122,21 +122,24 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 #Unidades - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Listboxs
-unidades = ["Km","hm","dam","m","dm", "cm", "mm"] #Unidades disponíveis
+lista_unidades = ["Km","hm","dam","m","dm", "cm", "mm"] #Unidades disponíveis
+
+variavel_listbx1 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))
+#Variável de controlo da listbox1
+
+variavel_listbx2 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))
+#Variável de controlo da listbox2
+
 
 listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
-                     selectmode = "browse")
+                     selectmode = "browse",listvariable=variavel_listbx1)
 listbx_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), justify = "center",
-                     selectmode = "browse")
+                     selectmode = "browse", listvariable = variavel_listbx2)
 
 #Labels
 unidade_label1 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 1 (lista_1)
 unidade_label2 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 2 (lista_2)
 
-
-#Inserir as unidades
-listbx_1.insert(tk.END, *unidades)
-listbx_2.insert(tk.END, *unidades)
 
 
 #Obter as unidades selecionadas
