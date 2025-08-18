@@ -16,17 +16,36 @@ def obter_unidade_lstb1(): #Obter as unidades selecionadas da listbox 1
 
 
 
-def converter(distancia): #Converter unidade 1
+def mostrar_resultado(distancia):
     global unidade_label1  # Unidade 1 escolhida
     global unidade_label2  # Unidade 2 escolhida
 
+    label_erro.config(text="")
 
     try:
-        num_converter = float(distancia.get()) #Obter o número a converter
-        unidade1 = unidade_label1.cget("text") #Obter a unidade selecionada a ser convertido
+        # Obter números e as unidades
+        num_converter = float(distancia.get())  # Obter o número a converter
+        unidade1 = unidade_label1.cget("text")  # Obter a unidade selecionada a ser convertido
         unidade2 = unidade_label2.cget("text")
 
-        label_erro.config(text = "")
+        if unidade1 and unidade2: #Se as duas unidades foram escolhidas
+            if unidade1 == unidade2: #Verificar se são iguais
+                distancia_2["text"] = num_converter #O número é igual
+            else:
+                #Converter o número
+                resultado = converter(unidade1,unidade2, num_converter)
+
+                #Mostrar o resultado
+                distancia_2["text"] = resultado
+        else:
+            label_erro["text"] = "Escolha as unidades"
+
+
+    except ValueError: #Se não conseguir obter o número
+        label_erro["text"] = "Insira um número"
+
+
+def converter(unidade1, unidade2, num_converter): #Converter unidade 1
 
         #Dicionário com as fórmulas correspondestes para converter
         formulas_para_converter = {"Km": 1000,#1km == 1000 metros
@@ -41,25 +60,16 @@ def converter(distancia): #Converter unidade 1
         #Km  (x10 ->)  hm  (x10 ->) dam  (x10->) m  (x10->)  dm  (x10->) cm  (x10->)  mm
         #    (<-x0.1)      (<-x0.1)      (<-x0.1)   (<-x0.1)     (<-x0.1)    (<-x0.1)
 
-        if unidade1 and unidade2: #Se tiver alguma unidade escolhida
-            if unidade1 == unidade2:
-                distancia_2["text"] = num_converter#Se as unidades forem iguais o número é o mesmo
-            else:#Se forem distintas
-                #Converter o número da unidade1 para metro
-                valor_em_metro = num_converter * formulas_para_converter[unidade1]
-                #Número para converter multiplicado pela fómula correspondente para metro
 
-                #Converter de metro para a unidade2 escolhida
-                valor_final = valor_em_metro / formulas_para_converter[unidade2]
+        #Converter o número da unidade1 para metro
+        valor_em_metro = num_converter * formulas_para_converter[unidade1]
+        #Número para converter multiplicado pela fómula correspondente para metro
+        #Converter de metro para a unidade2 escolhida
+        valor_final = valor_em_metro / formulas_para_converter[unidade2]
 
-                distancia_2["text"] = valor_final
+        return valor_final
 
 
-        else:
-            label_erro["text"] = "Escolha as unidades"
-
-    except ValueError:
-        label_erro["text"] = "Insira um número"
 
 #Janela - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 window = tk.Tk()
@@ -159,7 +169,7 @@ botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   activebackground= "#6e7370", activeforeground= "#ccc9be",
                   bg = "#3b3d3c", bd = 3,
                   relief = "solid", overrelief="flat",
-                  command = lambda: converter(distancia_1))
+                  command = lambda: mostrar_resultado(distancia_1))
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
 
 #Scrollbars - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
