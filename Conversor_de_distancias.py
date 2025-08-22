@@ -20,7 +20,7 @@ def mostrar_resultado(distancia):
     global unidade1_label1  # Unidade 1 escolhida
     global unidade2_label2  # Unidade 2 escolhida
 
-    label_erro.config(text="")
+    stringvar_labelerro.set("")
 
     try:
         # Obter números e as unidades
@@ -38,11 +38,11 @@ def mostrar_resultado(distancia):
                 #Mostrar o resultado
                 var_distancia_2.set(str(resultado))
         else:
-            label_erro["text"] = "Escolha as unidades"
+            stringvar_labelerro.set("Escolha as unidades")
 
 
     except ValueError: #Se não conseguir obter o número
-        label_erro["text"] = "Insira um número"
+        stringvar_labelerro.set("Insira um número")
 
 
 def converter(unidade1, unidade2, num_converter): #Converter unidade 1
@@ -110,7 +110,9 @@ frame_2.place(relx = 0, rely = 0.15,
               relwidth = 1, relheight = 0.85)
 
 #Label_Erro - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-label_erro = tk.Label(frame_2, text = "", fg = "OrangeRed3", font = ("Roboto", 11, "bold"))
+stringvar_labelerro = tk.StringVar()
+
+label_erro = tk.Label(frame_2, textvariable = stringvar_labelerro, fg = "OrangeRed3", font = ("Roboto", 11, "bold"))
 label_erro.place(relx = 0.50, rely = 0.92, anchor = "center")
 
 #Título - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
