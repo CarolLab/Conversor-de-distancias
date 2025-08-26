@@ -183,5 +183,9 @@ scrollbar_2 = tk.Scrollbar(listbx_2, relief = "flat")
 seta = tk.Label(frame_2, text = "➜", font = "Arial 16")
 seta.place(relx = 0.48, rely = 0.25)
 
+
+#Eventos - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+window.bind("<Return>",lambda event: mostrar_resultado(distancia_1))
+
 #Loop
 window.mainloop()
