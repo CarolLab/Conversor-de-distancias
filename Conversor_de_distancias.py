@@ -17,26 +17,24 @@ def obter_unidade_lstb1(): #Obter as unidades selecionadas da listbox 1
 
 
 def mostrar_resultado(distancia):
-    global unidade1_label1  # Unidade 1 escolhida
-    global unidade2_label2  # Unidade 2 escolhida
-
     stringvar_labelerro.set("")
 
     try:
         # Obter números e as unidades
-        num_converter = float(distancia.get())  # Obter o número a converter
+        num_converter = distancia.get().replace(",", ".")# Obter o número a converter
+        num_converter = float(num_converter)
         unidade1 = unidade1_label1.cget("text")  # Obter a unidade selecionada a ser convertido
         unidade2 = unidade2_label2.cget("text")
 
         if unidade1 and unidade2: #Se as duas unidades foram escolhidas
             if unidade1 == unidade2: #Verificar se são iguais
-                var_distancia_2.set(str(num_converter))#O número é igual
+                    var_distancia_2.set(str(num_converter))#O número é igual
             else:
-                #Converter o número
-                resultado = converter(unidade1,unidade2, num_converter)
+                    #Converter o número
+                    resultado = converter(unidade1,unidade2, num_converter)
 
-                #Mostrar o resultado
-                var_distancia_2.set(str(resultado))
+                    #Mostrar o resultado
+                    var_distancia_2.set(str(resultado))
         else:
             stringvar_labelerro.set("Escolha as unidades")
 
