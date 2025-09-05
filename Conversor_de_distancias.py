@@ -72,6 +72,7 @@ def converter(unidade1, unidade2, num_converter): #Converter unidade 1
 #Janela - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 window = tk.Tk()
 window.title("Conversor de distâncias")
+window.config(bg = "gray27")
 window.minsize(500, 250)
 window.maxsize(800, 400)
 
@@ -102,7 +103,7 @@ frame_1.config(bg = "#76b4b5")
 
 #Exibir os Frames
 frame_1.place(relx = 0, rely = 0,
-              relwidth = 1, relheight = 0.15)
+              relwidth = 1, relheight = 0.145)
 
 frame_2.place(relx = 0, rely = 0.15,
               relwidth = 1, relheight = 0.85)
