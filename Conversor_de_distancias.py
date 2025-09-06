@@ -145,9 +145,10 @@ variavel_listbx2 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in li
 
 
 listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
-                     selectmode = "browse",listvariable=variavel_listbx1)
+                     selectmode = "browse",listvariable=variavel_listbx1, selectforeground = "#1d1e21")
+
 listbx_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), justify = "center",
-                     selectmode = "browse", listvariable = variavel_listbx2)
+                     selectmode = "browse", listvariable = variavel_listbx2, selectforeground = "#1d1e21")
 
 #Labels
 unidade1_label1 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 1 (lista_1)
@@ -170,7 +171,7 @@ unidade2_label2.place(relx = 0.80, rely = 0.15, anchor = "center")
 botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   text="Converter", font="Roboto 11",fg = "White",
                   activebackground= "#6e7370", activeforeground= "#ccc9be",
-                  bg = "#3b3d3c", bd = 3,
+                  bg = "#3b3d3c", bd = 2,
                   relief = "solid", overrelief="flat",
                   command = lambda: mostrar_resultado(distancia_1))
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
