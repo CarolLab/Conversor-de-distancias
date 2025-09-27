@@ -108,9 +108,20 @@ frame_1.place(relx = 0, rely = 0,
 frame_2.place(relx = 0, rely = 0.15,
               relwidth = 1, relheight = 0.85)
 
-#Label_Erro - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+lista_unidades = ["Km","hm","dam","m","dm", "cm", "mm"] #Unidades disponíveis
+
+#Variáveis de controlo - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 stringvar_labelerro = tk.StringVar()
 
+var_distancia_2 = tk.StringVar()#Variável de controlo de distancia_2
+
+variavel_listbx1 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))#Variável de controlo da listbox1
+variavel_listbx2 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))#Variável de controlo da listbox2
+
+
+
+#Label_Erro - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 label_erro = tk.Label(frame_2, textvariable = stringvar_labelerro, fg = "OrangeRed3", font = ("Roboto", 11, "bold"))
 label_erro.place(relx = 0.50, rely = 0.92, anchor = "center")
 
@@ -122,7 +133,6 @@ titulo.place(relx = 0.5, rely = 0.5, anchor = "center")
 
 #Distâncias - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Variáveis de controlo
-var_distancia_2 = tk.StringVar()#Variável de controlo do label distancia_2
 #Entrys
 distancia_1 = tk.Entry(frame_2, relief = "solid", bd = 1,
                        font = "Arial 13") #Número para converter
@@ -135,30 +145,21 @@ distancia_2.place(relx = 0.65, rely = 0.25, relwidth = 0.30, relheight = 0.12)
 
 #Unidades - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Listboxs
-lista_unidades = ["Km","hm","dam","m","dm", "cm", "mm"] #Unidades disponíveis
-
-variavel_listbx1 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))
-#Variável de controlo da listbox1
-
-variavel_listbx2 = tk.StringVar(value = f"".join(unidade +"\n" for unidade in lista_unidades))
-#Variável de controlo da listbox2
-
-
 listbx_1 = tk.Listbox(frame_2,bd = 2, relief = "solid",font = ("Arial", 13),justify = "center",
                      selectmode = "browse",listvariable=variavel_listbx1, selectforeground = "#1d1e21")
 
 listbx_2 = tk.Listbox(frame_2,bd = 2, relief = "solid", font = ("Arial", 13), justify = "center",
                      selectmode = "browse", listvariable = variavel_listbx2, selectforeground = "#1d1e21")
 
-#Labels
-unidade1_label1 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 1 (lista_1)
-unidade2_label2 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 2 (lista_2)
-
-
 
 #Obter as unidades selecionadas
 listbx_1.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb1())
 listbx_2.bind("<<ListboxSelect>>", lambda event: obter_unidade_lstb2())
+
+
+#Labels(Exibem a unidade selecionada)
+unidade1_label1 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 1 (lista_1)
+unidade2_label2 = tk.Label(frame_2, text = "", font = "Tahoma") #Label da unidade 2 (lista_2)
 
 #Posicionamentos das Listbox e Labels
 listbx_1.place(relx = 0.19, rely = 0.47, relwidth = 0.1, relheight = 0.22,anchor = "n")
@@ -176,9 +177,7 @@ botao = tk.Button(frame_2, width=15, height = 1, cursor = "hand2",
                   command = lambda: mostrar_resultado(distancia_1))
 botao.place(relx = 0.50, rely = 0.80, anchor = "center")
 
-#Scrollbars - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-scrollbar_1 = tk.Scrollbar(listbx_1, relief = "flat")
-scrollbar_2 = tk.Scrollbar(listbx_2, relief = "flat")
+
 #Seta - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 seta = tk.Label(frame_2, text = "➜", font = "Arial 16")
 seta.place(relx = 0.48, rely = 0.25)
